@@ -2,9 +2,15 @@
   "name": "w_s10_challenge",
   "version": "0.0.1",
   "scripts": {
-  "test": "jest --watchAll --verbose"
-}
-,
+    "dev": "fkill :9009 :3003 -f -s && concurrently \"npm:backend\" \"npm:frontend\"",
+    "test": "cross-env NODE_ENV=testing jest --watchAll --verbose",
+    "test:codegrade": "cross-env NODE_ENV=testing jest",
+    "build": "cross-env NODE_ENV=production webpack",
+    "frontend": "webpack serve --open",
+    "backend": "node backend/server.js",
+    "start": "npm run backend",
+    "heroku-postbuild": "npm run build"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
